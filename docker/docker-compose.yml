@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  # This Is the Application and set the container name as "ladanielha-learn-php-app"
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: ladanielha-learn-php-app
+    restart: always
+    working_dir: /var/www/
+    volumes:
+      - ../src:/var/www
+
+  # This Is the Server Nginx and set to run in the container name as "ladanielha-learn-php-app"
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: ladanielha-learn-php-nginx
+    restart: always
+    ports:
+      - 8005:80
+    volumes:
+      - ../src:/var/www
+      - ./nginx:/etc/nginx/conf.d
